@@ -1,0 +1,10 @@
+[project]
+name = "uipath_coded_process"
+version = "0.0.1"
+description = "uipath_coded_process"
+authors = [{ name = "Valerie" }]
+dependencies = [
+    "pydantic>=2.0",
+    "uipath>=2.10.0, <2.11.0"
+]
+requires-python = ">=3.11"

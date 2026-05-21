@@ -1,0 +1,204 @@
+{
+    "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+    "$id": "entry-points.json",
+    "entryPoints": [
+        {
+            "filePath": "main",
+            "uniqueId": "63626e58-4ba9-4168-a4aa-0909f3073f68",
+            "type": "function",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "vm_host": {
+                        "description": "Hostname or IP address of the VM to test.",
+                        "title": "Vm Host",
+                        "type": "string"
+                    },
+                    "vm_port": {
+                        "default": 3389,
+                        "description": "TCP port used to confirm the VM is reachable. Defaults to RDP.",
+                        "maximum": 65535,
+                        "minimum": 1,
+                        "title": "Vm Port",
+                        "type": "integer"
+                    },
+                    "timeout_seconds": {
+                        "default": 5.0,
+                        "description": "Timeout for each smoke-test check.",
+                        "exclusiveMinimum": 0,
+                        "maximum": 60,
+                        "title": "Timeout Seconds",
+                        "type": "number"
+                    },
+                    "microsoft_account_hint": {
+                        "type": "string"
+                    },
+                    "require_account_hint_match": {
+                        "default": false,
+                        "description": "When true, the Microsoft account hint must appear in the sign-in evidence.",
+                        "title": "Require Account Hint Match",
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "vm_host"
+                ],
+                "title": "Input"
+            },
+            "output": {
+                "type": "object",
+                "properties": {
+                    "passed": {
+                        "title": "Passed",
+                        "type": "boolean"
+                    },
+                    "summary": {
+                        "title": "Summary",
+                        "type": "string"
+                    },
+                    "microsoft_account": {
+                        "properties": {
+                            "name": {
+                                "title": "Name",
+                                "type": "string"
+                            },
+                            "passed": {
+                                "title": "Passed",
+                                "type": "boolean"
+                            },
+                            "details": {
+                                "title": "Details",
+                                "type": "string"
+                            },
+                            "evidence": {
+                                "additionalProperties": {
+                                    "type": "string"
+                                },
+                                "title": "Evidence",
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "passed",
+                            "details"
+                        ],
+                        "title": "CheckResult",
+                        "type": "object"
+                    },
+                    "vm_access": {
+                        "properties": {
+                            "name": {
+                                "title": "Name",
+                                "type": "string"
+                            },
+                            "passed": {
+                                "title": "Passed",
+                                "type": "boolean"
+                            },
+                            "details": {
+                                "title": "Details",
+                                "type": "string"
+                            },
+                            "evidence": {
+                                "additionalProperties": {
+                                    "type": "string"
+                                },
+                                "title": "Evidence",
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "passed",
+                            "details"
+                        ],
+                        "title": "CheckResult",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "passed",
+                    "summary",
+                    "microsoft_account",
+                    "vm_access"
+                ],
+                "title": "Output"
+            },
+            "graph": {
+                "nodes": [
+                    {
+                        "id": "main.py:71",
+                        "name": "main",
+                        "type": "function",
+                        "metadata": {
+                            "file": "main.py"
+                        }
+                    },
+                    {
+                        "id": "main.py:142",
+                        "name": "_check_microsoft_account",
+                        "type": "function",
+                        "metadata": {
+                            "file": "main.py"
+                        }
+                    },
+                    {
+                        "id": "main.py:227",
+                        "name": "_run_command",
+                        "type": "function",
+                        "metadata": {
+                            "file": "main.py"
+                        }
+                    },
+                    {
+                        "id": "main.py:246",
+                        "name": "_parse_dsreg_status",
+                        "type": "function",
+                        "metadata": {
+                            "file": "main.py"
+                        }
+                    },
+                    {
+                        "id": "main.py:195",
+                        "name": "_check_vm_access",
+                        "type": "function",
+                        "metadata": {
+                            "file": "main.py"
+                        }
+                    },
+                    {
+                        "id": "main.py:257",
+                        "name": "_resolve_host",
+                        "type": "function",
+                        "metadata": {
+                            "file": "main.py"
+                        }
+                    }
+                ],
+                "edges": [
+                    {
+                        "source": "main.py:142",
+                        "target": "main.py:227"
+                    },
+                    {
+                        "source": "main.py:142",
+                        "target": "main.py:246"
+                    },
+                    {
+                        "source": "main.py:71",
+                        "target": "main.py:142"
+                    },
+                    {
+                        "source": "main.py:195",
+                        "target": "main.py:257"
+                    },
+                    {
+                        "source": "main.py:71",
+                        "target": "main.py:195"
+                    }
+                ]
+            }
+        }
+    ]
+}
